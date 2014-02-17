@@ -23,27 +23,30 @@ $(function(){
     apiId: 4191816
   });
 
+  loading = false;
 
   form_valid = function(){
     return ($("#order_vk_group_link").val() == "") || $("#order_vk_group_link").val().match(/vk\.com\//);
   }
 
   submit_form = function(){
-    show_loading();
-    $("#new_order").submit();
-    hide_loading();
+    if (!loading) {
+      show_loading();
+      $("#new_order").submit();
+      hide_loading();
+    }
   }
 
 
   show_loading = function(){
     $("#emails-count").html("<img style='margin-left:100px;' src='http://main.bsmarter.mobi/images/spinner.gif'>")
+    loading = true;
   }
 
   hide_loading = function(){
-
+    loading = false;
   }
 
-  submit_form();
   $("#order_vk_group_link").on('input', function(){
     if (form_valid()) {
       submit_form();

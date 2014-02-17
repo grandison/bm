@@ -46,6 +46,7 @@ gem 'oj'
 gem 'activerecord-import'
 gem 'pry'
 gem 'google-api-client'
+gem 'capistrano'
 # Use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.1.2'
 
