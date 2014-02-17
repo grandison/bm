@@ -214,6 +214,7 @@ DEPENDENCIES
   jbuilder (~> 1.2)
   jquery-rails
   jquery-ui-rails
+  kgio
   less-rails
   mysql2
   oj
