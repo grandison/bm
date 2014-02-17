@@ -82,6 +82,10 @@ namespace :deploy do
     end
   end
 
+  task :restart_delayed_job do                                                                                                               
+    invoke 'delayed_job:restart'                                                
+  end 
+
   before 'deploy:assets:precompile', :stop_unicorn
   after :publishing, :start_unicorn
   after :publishing, :restart_delayed_job
