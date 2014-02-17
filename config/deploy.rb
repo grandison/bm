@@ -84,7 +84,7 @@ namespace :deploy do
 
   task :restart_delayed_job do                                                                                                           
     on roles(:app), in: :sequence, wait: 10 do |host|
-      execute "cd /var/www/rails/bazomania/current && ( RAILS_ENV=production /usr/bin/env bin/delayed_job -n 2 restart )"                                              
+      execute "cd #{release_path} && (RAILS_ENV=production /usr/local/rvm/bin/rvm default do bin/delayed_job restart)"                                              
     end
   end 
 

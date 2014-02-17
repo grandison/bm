@@ -39,7 +39,7 @@ $(function(){
 
 
   show_loading = function(){
-    $("#emails-count").html("<img style='margin-left:0px;' src='ajax-loader.gif'>")
+    $("#emails-count").html("<img style='margin-left:0px;' src='ajax-loader.gif'> Подождите идет генерация базы")
     loading = true;
   }
 

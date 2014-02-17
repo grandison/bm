@@ -1,5 +1,11 @@
 <% if @with_order %>
   window.location = '<%= url_for(@order) %>';
 <% else %>
-  $("#emails-count").text("<%= @count %> емейлов найдено.");
+  <% if @count %>
+    $("#emails-count").text("<%= @count %> емейлов найдено.");
+  <% else %>
+  setTimeout(function(){
+    $("#new_order").submit();
+  }, 10000);
+  <% end %>
 <% end %>

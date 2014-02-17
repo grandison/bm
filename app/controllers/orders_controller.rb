@@ -8,7 +8,10 @@ class OrdersController < ApplicationController
     @with_order = params[:commit].present?
     @order = Order.create(params[:order].permit(:vk_city_id, :sex, :vk_group_link))
     unless @with_order
-      @count = VkAccount.search(@order).count
+      @search = VkAccount.search(@order)
+      if @search
+        @count = @search.count
+      end
     end
     respond_to do |format|
       format.js

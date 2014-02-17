@@ -14,7 +14,12 @@ class VkAccount < ActiveRecord::Base
     end
     if order.vk_group_id.present?
       group_id = order.vk_group_id
-      VkGroup.prepare(group_id)
+      connection = ActiveRecord::Base.connection
+      unless connection.execute("show tables like 'vk_group_#{order.vk_group_id}'").first
+        VkGroup.delay.prepare(group_id)
+        return false
+      end
+      return false unless connection.execute("SHOW INDEX FROM vk_group_#{order.vk_group_id}").first
       scope = scope.joins("INNER JOIN vk_group_#{group_id} ON vk_accounts.vk_id = vk_group_#{group_id}.vk_user_id")
     end
     scope
