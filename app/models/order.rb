@@ -17,7 +17,8 @@ class Order < ActiveRecord::Base
     return true if vk_group_link.blank?
     vk_index = vk_group_link.index("vk.com/")
     return false unless vk_index
-    screen_name = vk_group_link.match(/vk.com\/([\d\_\w\.]+)/)[1]
+    screen_name = vk_group_link.match(/vk.com\/([\d\_\w\.]+)/).try(:[],1)
+    return false unless 
     request = Typhoeus.get("http://api.vk.com/method/utils.resolveScreenName?screen_name=#{screen_name}")
     response = Oj.load(request.body)["response"]
     return false if response.blank?
