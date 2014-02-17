@@ -6,7 +6,8 @@
     $("#new_order :input").removeAttr("disabled");
   <% else %>
   setTimeout(function(){
-    $("#new_order").submit();
+    $("#new_order :input").removeAttr("disabled");
+    submit_form();
   }, 10000);
   <% end %>
 <% end %>
