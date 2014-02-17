@@ -1,0 +1,5 @@
+<% if @with_order %>
+  window.location = '<%= url_for(@order) %>';
+<% else %>
+  $("#emails-count").text("<%= @count %> емейлов найдено.");
+<% end %>
