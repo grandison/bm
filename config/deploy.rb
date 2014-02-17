@@ -82,8 +82,10 @@ namespace :deploy do
     end
   end
 
-  task :restart_delayed_job do                                                                                                               
-    invoke 'delayed_job:restart'                                                
+  task :restart_delayed_job do                                                                                                           
+    on roles(:app), in: :sequence, wait: 10 do |host|
+      execute "cd /var/www/rails/bazomania/current && ( RAILS_ENV=production /usr/bin/env bin/delayed_job -n 2 restart )"                                              
+    end
   end 
 
   before 'deploy:assets:precompile', :stop_unicorn
