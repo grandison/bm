@@ -17,4 +17,14 @@ class OrdersController < ApplicationController
   def show
     @order = Order.find_by_plug(params[:id])
   end
+
+  def info
+    @order = Order.find_by_plug(params[:order_id])
+    @count = VkAccount.search(@order).count
+  end
+
+  def generate
+    @order = Order.find_by_plug(params[:order_id])
+    @order.delay.generate!
+  end
 end

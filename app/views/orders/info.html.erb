@@ -1,0 +1,9 @@
+Информация о заказе
+<ul>
+  <li>Группа: <%= @order.vk_group_link == "" ? "не задана" : @order.vk_group_link %></li>
+  <li>Город: <%= VkCity::CITIES[@order.vk_city_id] %></li>
+  <li>Пол: <%= {"1" => "женский", "2" => "мужской"}[@order.sex] || "Пол не задан" %></li>
+  <li>Всего:<%= @count %> емейлов</li>
+</ul>
+
+

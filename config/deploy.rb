@@ -22,6 +22,8 @@ set :shared_path, "#{fetch(:deploy_to)}/shared"
 set :unicorn_config, "#{fetch(:shared_path)}/config/unicorn.rb"
 set :unicorn_pid, "#{fetch(:shared_path)}/pids/unicorn.pid"
 
+set :delayed_job_args, "-n 2"
+
 # Default value for :format is :pretty
 # set :format, :pretty
 
@@ -82,6 +84,7 @@ namespace :deploy do
 
   before 'deploy:assets:precompile', :stop_unicorn
   after :publishing, :start_unicorn
+  after :publishing, :restart_delayed_job
 
   after :restart, :clear_cache do
     on roles(:web), in: :groups, limit: 3, wait: 10 do

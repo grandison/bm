@@ -39,7 +39,7 @@ $(function(){
 
 
   show_loading = function(){
-    $("#emails-count").html("<img style='margin-left:100px;' src='http://main.bsmarter.mobi/images/spinner.gif'>")
+    $("#emails-count").html("<img style='margin-left:0px;' src='ajax-loader.gif'>")
     loading = true;
   }
 
