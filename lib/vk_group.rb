@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class VkGroup
   def self.prepare(vk_group_id)
     connection = ActiveRecord::Base.connection

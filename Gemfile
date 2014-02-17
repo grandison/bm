@@ -50,6 +50,7 @@ gem 'capistrano'
 gem 'unicorn'
 gem "kgio", "~> 2.8.1"
 gem 'delayed_job_active_record'
+gem "magic_encoding"
 # Use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.1.2'
 

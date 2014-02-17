@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class CreateVkAccounts < ActiveRecord::Migration
   def change
     create_table :vk_accounts do |t|

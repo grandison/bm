@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 require 'securerandom'
  require 'digest/md5'
 class Order < ActiveRecord::Base
