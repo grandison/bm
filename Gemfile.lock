@@ -214,6 +214,7 @@ DEPENDENCIES
   activerecord-import
   capistrano
   coffee-rails (~> 4.0.0)
+  delayed_job
   delayed_job_active_record
   formtastic
   formtastic-bootstrap
