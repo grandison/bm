@@ -3,6 +3,7 @@
 <% else %>
   <% if @count %>
     $("#emails-count").text("<%= @count %> емейлов найдено.");
+    $("#new_order :input").removeAttr("disabled");
   <% else %>
   setTimeout(function(){
     $("#new_order").submit();

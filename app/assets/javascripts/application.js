@@ -33,6 +33,7 @@ $(function(){
     if (!loading) {
       show_loading();
       $("#new_order").submit();
+      $("#new_order :input").attr("disabled", true);
       hide_loading();
     }
   }
