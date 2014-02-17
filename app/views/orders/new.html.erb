@@ -1,3 +1,67 @@
+<style type="text/css">
+  
+/* Badger
+------------------------- */
+
+[class*="badger"] {
+    position: relative;
+    margin: 15px 0;
+    padding: 39px 19px 14px;
+    background: #fff;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+}
+
+[class*="badger"]:after {
+    content: attr(data-badger);
+    position: absolute;
+    top: 0;
+    padding: 3px 7px;
+    font-size: 12px;
+    font-weight: bold;
+    background: #999;
+    color: #fff;
+}
+
+.badger-left:after {
+    left: 0;
+    border-radius: 6px 0 6px 0;
+}
+
+.badger-right:after {
+    right: 0;
+    border-radius: 0 6px 0 6px;
+}
+
+.badger-danger:after {
+    background: #d9534f;
+}
+
+.badger-warning:after {
+    background: #f0ad4e;
+}
+
+.badger-success:after {
+    background: #5cb85c;
+}
+
+.badger-info:after {
+    background: #5bc0de;
+}
+
+.badger-inverse:after {
+    background: #222;
+}
+
+.span4 form {
+  margin-top: 55px;
+}
+</style>
+
+
+
+        
+
 <div class="span4">
 <%= semantic_form_for @order, html: {role:"form", style:"width:100%;"}, remote: true do |f| %>
   <%= f.inputs do %>
@@ -9,10 +73,20 @@
 <% end %>
 
 </div>
-<div class="span8">
+<div class="span5">
   <h2 id="emails-count">&nbsp;</h1>
   <ul style="margin:0px;">
     <li>Учтите, что, указывая город, вы отфильтровываете всех людей, не указавших город в своем профиле.</li>
     <li>Продаваемая база будет содержать только емейлы, никаких ссылок на профиль и имен.</li>
+    <li>Контакты оператора:</li>
+
+<li class="badger-left badger-info" data-badger="Skype">
+  catunderhat
+</li> 
+
+<li class="badger-left badger-success" data-badger="ВК">
+  <a href="http://vk.com/id235581846">http://vk.com/id235581846</a>
+</li> 
+
   </ul>
 </div>
