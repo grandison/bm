@@ -14,7 +14,7 @@ set :repo_url, "git@github.com:grandison/bm.git"
 # Default value for :scm is :git
 set :scm, :git
 set :deploy_via, :remote_cache
-set :user, :taxibase
+set :user, :bazomania
 set :deploy_to, "/var/www/rails/#{fetch(:application)}"
 
 set :unicorn_binary, "bundle exec unicorn"

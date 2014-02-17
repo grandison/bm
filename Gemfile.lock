@@ -50,7 +50,7 @@ GEM
     commonjs (0.2.7)
     daemons (1.1.9)
     erubis (2.7.0)
-    ethon (0.6.2)
+    ethon (0.6.3)
       ffi (>= 1.3.0)
       mime-types (~> 1.18)
     eventmachine (1.0.3)
@@ -106,10 +106,10 @@ GEM
     mysql2 (0.3.15)
     net-scp (1.1.2)
       net-ssh (>= 2.6.5)
-    net-ssh (2.7.0)
-    oj (2.4.2)
+    net-ssh (2.8.0)
+    oj (2.5.4)
     polyglot (0.3.3)
-    pry (0.9.12.4)
+    pry (0.9.12.6)
       coderay (~> 1.0)
       method_source (~> 0.8)
       slop (~> 3.4)
@@ -163,8 +163,8 @@ GEM
       net-scp (>= 1.1.2)
       net-ssh
       term-ansicolor
-    term-ansicolor (1.2.2)
-      tins (~> 0.8)
+    term-ansicolor (1.3.0)
+      tins (~> 1.0)
     therubyracer (0.12.1)
       libv8 (~> 3.16.14.0)
       ref
@@ -176,7 +176,7 @@ GEM
     thread_safe (0.1.3)
       atomic
     tilt (1.4.1)
-    tins (0.13.1)
+    tins (1.0.0)
     treetop (1.4.15)
       polyglot
       polyglot (>= 0.3.1)

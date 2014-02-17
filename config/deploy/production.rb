@@ -16,9 +16,9 @@
 # something that quacks like a hash can be used to set
 # extended properties on the server.
 
-role :app, %w{188.226.155.19/}
-role :web, %w{188.226.155.19/}
-role :db,  %w{188.226.155.19/}
+role :app, %w{188.226.155.19}
+role :web, %w{188.226.155.19}
+role :db,  %w{188.226.155.19}
 # server "91.239.26.188", user: 'shangely', roles: %w{web app}
 
 # you can set custom ssh options
