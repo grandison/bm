@@ -48,7 +48,7 @@ gem 'pry'
 gem 'google-api-client'
 gem 'capistrano'
 gem 'unicorn'
-gem 'kgio'
+gem "kgio", "~> 2.8.1"
 # Use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.1.2'
 
