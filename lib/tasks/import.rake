@@ -1,12 +1,8 @@
 namespace :import do
   desc "Import contacts"
   task :contacts => :environment do
-    skip_count = 43000
     f = File.open(Rails.root.join("contacts.txt"))
     # VkAccount.destroy_all
-    skip_count.times do
-      f.gets
-    end
     loop do
       emails = []
       vk_ids = []
@@ -22,7 +18,6 @@ namespace :import do
         VkAccount.new(email: emails[index], vk_id: vk_ids[index], vk_city_id: account["city"], sex: account["sex"])
       end
       VkAccount.import(accs)
-      p skip_count
       if emails.count < 1000
         exit
       end

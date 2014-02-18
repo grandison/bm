@@ -30,6 +30,7 @@ class Order < ActiveRecord::Base
     VkAccount.search(self).pluck(:email).each do |v|
       f.write(v + "\n")
     end
+    f.close
   end
 
   private
