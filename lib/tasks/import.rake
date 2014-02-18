@@ -11,7 +11,6 @@ namespace :import do
         emails << email
         vk_ids << vk_id
       end
-      skip_count += emails.count
       index = -1
       accs = Oj.load(Typhoeus.post("https://api.vk.com/method/getProfiles?fields=city,sex&access_token=794e9fcb0d26fe28c2010a8b87a802c3b82304fd644154d8daf0f676f7662291a3f30835259b81ced0e67", body:{uids: vk_ids.join(",")}).body)["response"].map do |account|
         index += 1
