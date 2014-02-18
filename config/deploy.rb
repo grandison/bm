@@ -90,7 +90,6 @@ namespace :deploy do
 
   before 'deploy:assets:precompile', :stop_unicorn
   after :publishing, :start_unicorn
-  after :publishing, :restart_delayed_job
 
   after :restart, :clear_cache do
     on roles(:web), in: :groups, limit: 3, wait: 10 do
