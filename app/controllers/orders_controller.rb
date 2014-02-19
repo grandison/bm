@@ -29,6 +29,6 @@ class OrdersController < ApplicationController
 
   def generate
     @order = Order.find_by_plug(params[:order_id])
-    @order.delay.generate!
+    @order.generate!
   end
 end
