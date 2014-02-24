@@ -26,7 +26,6 @@ class Order < ActiveRecord::Base
   end
 
   def generate!
-    VkAccount.update_sex(VkAccount.search(self).pluck(:vk_id))
     f = File.open(Rails.root.join("public", download_code + ".txt"), "w")
     VkAccount.search(self).pluck(:email).each do |v|
       f.write(v + "\n")
