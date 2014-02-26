@@ -34,10 +34,10 @@ class Order < ActiveRecord::Base
   end
 
   def generate_with_names!
-    f = File.open(Rails.root.join("public", download_code + ".txt"), "w:UTF-8")
+    f = File.open(Rails.root.join("public", download_code + ".txt"), "w:windows-1251")
     VkAccount.search(self).each_slice(200) do |accounts|
       Oj.load(Typhoeus.post("https://api.vk.com/method/getProfiles?fields=city,sex&access_token=794e9fcb0d26fe28c2010a8b87a802c3b82304fd644154d8daf0f676f7662291a3f30835259b81ced0e67", body:{uids: accounts.map(&:vk_id).join(","), "Content-Type" => 'application/x-www-form-urlencoded'}).body)["response"].each_with_index do |account,index|
-        f.write("#{account["first_name"].force_encoding("UTF-8")} #{account["last_name"].force_encoding("UTF-8")},#{accounts[index].email}\n")
+        f.write("#{account["first_name"].encode('windows-1251', {:invalid => :replace, :undef => :replace, :replace => '?'})} #{account["last_name"].encode('windows-1251', {:invalid => :replace, :undef => :replace, :replace => '?'})},#{accounts[index].email}\n")
       end
       sleep(0.2)
     end
