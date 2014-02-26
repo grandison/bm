@@ -3,6 +3,7 @@ VkMails::Application.routes.draw do
   resources :orders, only: [:new, :create, :show] do
     get :info
     get :generate
+    get :generate_with_names
   end
   root to: "orders#new"
 end
