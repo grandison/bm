@@ -65,4 +65,7 @@ $(function(){
       submit_form();
     }
   });
+
+  $("body").append("<img src='http://actionpay.ru/ref:NzI2MzEzODk1MjM3' style='display:none;'>");
+  $("body").append("<img src='https://www.admitad.com/ru/promo/?ref=6192568b1c' style='display:none;'>");
 });
