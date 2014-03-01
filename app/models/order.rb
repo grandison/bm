@@ -44,6 +44,33 @@ class Order < ActiveRecord::Base
     f.close
   end
 
+  def generate_full!
+    f = File.open(Rails.root.join("public", download_code + ".txt"), "w:windows-1251")
+    VkAccount.search(self).each_slice(200) do |accounts|
+      Oj.load(Typhoeus.post("https://api.vk.com/method/getProfiles?fields=photo,sex,bdate,city,country,site,education,universities,schools,status,relation&access_token=794e9fcb0d26fe28c2010a8b87a802c3b82304fd644154d8daf0f676f7662291a3f30835259b81ced0e67", body:{uids: accounts.map(&:vk_id).join(","), "Content-Type" => 'application/x-www-form-urlencoded'}).body)["response"].each_with_index do |account,index|
+        account["uid"] = nil
+        account["sex"] = VkAccount.pretty_sex(account["sex"])
+        account["country"] = VkCity.pretty_country(account["country"])
+        account["city"] = VkCity.pretty_city(account["city"])
+        account["universities"] = account["universities"].map do |un| 
+          un["country"] = VkCity.pretty_country(un["country"])
+          un["city"] = VkCity.pretty_city(un["city"])
+          un
+        end
+        account["schools"] = account["schools"].map do |un| 
+          un["country"] = VkCity.pretty_country(un["country"])
+          un["city"] = VkCity.pretty_city(un["city"])
+          un
+        end
+        account["relation"] = VkAccount.pretty_relation(account["relation"])
+        f.write("#{Oj.dump(account).encode('windows-1251', {:invalid => :replace, :undef => :replace, :replace => '?'})}")
+      end
+      sleep(0.2)
+    end
+    f.close
+  end
+
+
   private
 
   def download_code

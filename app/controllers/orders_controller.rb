@@ -37,4 +37,10 @@ class OrdersController < ApplicationController
     @order.generate_with_names!
     render action: "generate"
   end
+
+  def generate_full
+    @order = Order.find_by_plug(params[:order_id])
+    @order.generate_full!
+    render action: "generate"
+  end
 end
