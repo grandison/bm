@@ -5,17 +5,30 @@ require 'typhoeus'
 class VkCity < ActiveRecord::Base
   CITIES = {1 => 'Москва',2 => 'Санкт-Петербург',37 => 'Владивосток',10 => 'Волгоград',49 => 'Екатеринбург',60 => 'Казань',61 => 'Калининград',72 => 'Краснодар',73 => 'Красноярск',95 => 'Нижний Новгород',99 => 'Новосибирск',104 => 'Омск',110 => 'Пермь',119 => 'Ростов-на-Дону',123 => 'Самара',151 => 'Уфа',153 => 'Хабаровск',158 => 'Челябинск', 87 => 'Мурманск'}
 
+  validates :vk_city_id, presence: true
+
   def self.pretty_country(country)
-    @countries ||= {}
-    @countries[country] ||= begin
-      country && Oj.load(Typhoeus.get("https://api.vk.com/method/database.getCountriesById?country_ids=#{country}&access_token=794e9fcb0d26fe28c2010a8b87a802c3b82304fd644154d8daf0f676f7662291a3f30835259b81ced0e67").body)["response"].first["name"]
+    @@countries ||= {}
+    @@countries[country] ||= begin
+      if country && (country != 0)
+        sleep(0.5)
+        Oj.load(Typhoeus.get("https://api.vk.com/method/database.getCountriesById?country_ids=#{country}&access_token=794e9fcb0d26fe28c2010a8b87a802c3b82304fd644154d8daf0f676f7662291a3f30835259b81ced0e67").body)["response"].first["name"]
+      end
     end
   end
 
   def self.pretty_city(city)
-    @countries ||= {}
-    @countries[city] ||= begin
-      city && (Oj.load(Typhoeus.get("https://api.vk.com/method/database.getCitiesById?city_ids=#{city}&access_token=794e9fcb0d26fe28c2010a8b87a802c3b82304fd644154d8daf0f676f7662291a3f30835259b81ced0e67").body)["response"].first["name"])
+    if city && (city > 0)
+      @@cities[city.to_s].name
+    end
+  end
+
+  def self.prepare_cities(cities)
+    @@cities ||= {}
+    Oj.load(Typhoeus.get("https://api.vk.com/method/database.getCitiesById?city_ids=#{cities.join(",")}&access_token=794e9fcb0d26fe28c2010a8b87a802c3b82304fd644154d8daf0f676f7662291a3f30835259b81ced0e67").body)["response"].each do |city|
+      @@cities[city['cid']] ||= begin 
+        find_by_vk_city_id(city['cid']) || create!(vk_city_id: city['cid'], name: city['name'])
+      end
     end
   end
 end

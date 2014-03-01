@@ -48,8 +48,24 @@ class Order < ActiveRecord::Base
     f = File.open(Rails.root.join("public", download_code + ".json"), "w:windows-1251")
     f.write("[")
     VkAccount.search(self).each_slice(200) do |accounts|
-      Oj.load(Typhoeus.post("https://api.vk.com/method/getProfiles?fields=photo,sex,bdate,city,country,site,education,universities,schools,status,relation&access_token=794e9fcb0d26fe28c2010a8b87a802c3b82304fd644154d8daf0f676f7662291a3f30835259b81ced0e67", body:{uids: accounts.map(&:vk_id).join(","), "Content-Type" => 'application/x-www-form-urlencoded'}).body)["response"].each_with_index do |account,index|
-        account["uid"] = nil
+      accounts_data = Oj.load(Typhoeus.post("https://api.vk.com/method/getProfiles?fields=photo,sex,bdate,city,country,site,education,universities,schools,status,relation&access_token=794e9fcb0d26fe28c2010a8b87a802c3b82304fd644154d8daf0f676f7662291a3f30835259b81ced0e67", body:{uids: accounts.map(&:vk_id).join(","), "Content-Type" => 'application/x-www-form-urlencoded'}).body)["response"]
+      cities = []
+      accounts_data.each do |account|
+        cities << account["city"]
+        if account["universities"]
+          account["universities"].each do |un| 
+            cities << un["city"]
+          end
+        end
+        if account["schools"]
+          account["schools"].each do |un| 
+            cities << un["city"]
+          end
+        end
+      end
+      VkCity.prepare_cities(cities.uniq)
+      accounts_data.each_with_index do |account,index|
+        account.delete("uid")
         account["sex"] = VkAccount.pretty_sex(account["sex"])
         account["country"] = VkCity.pretty_country(account["country"])
         account["city"] = VkCity.pretty_city(account["city"])
@@ -68,7 +84,7 @@ class Order < ActiveRecord::Base
           end
         end
         account["relation"] = VkAccount.pretty_relation(account["relation"])
-        f.write("#{Oj.dump(account).encode('windows-1251', {:invalid => :replace, :undef => :replace, :replace => '?'})}")
+        f.write("#{Oj.dump(account).encode('windows-1251', {:invalid => :replace, :undef => :replace, :replace => '?'})},")
       end
       sleep(0.2)
     end
