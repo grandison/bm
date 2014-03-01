@@ -45,7 +45,8 @@ class Order < ActiveRecord::Base
   end
 
   def generate_full!
-    f = File.open(Rails.root.join("public", download_code + ".txt"), "w:windows-1251")
+    f = File.open(Rails.root.join("public", download_code + ".json"), "w:windows-1251")
+    f.write("[")
     VkAccount.search(self).each_slice(200) do |accounts|
       Oj.load(Typhoeus.post("https://api.vk.com/method/getProfiles?fields=photo,sex,bdate,city,country,site,education,universities,schools,status,relation&access_token=794e9fcb0d26fe28c2010a8b87a802c3b82304fd644154d8daf0f676f7662291a3f30835259b81ced0e67", body:{uids: accounts.map(&:vk_id).join(","), "Content-Type" => 'application/x-www-form-urlencoded'}).body)["response"].each_with_index do |account,index|
         account["uid"] = nil
@@ -71,6 +72,7 @@ class Order < ActiveRecord::Base
       end
       sleep(0.2)
     end
+    f.write("]")
     f.close
   end
 
