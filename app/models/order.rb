@@ -52,15 +52,19 @@ class Order < ActiveRecord::Base
         account["sex"] = VkAccount.pretty_sex(account["sex"])
         account["country"] = VkCity.pretty_country(account["country"])
         account["city"] = VkCity.pretty_city(account["city"])
-        account["universities"] = account["universities"].map do |un| 
-          un["country"] = VkCity.pretty_country(un["country"])
-          un["city"] = VkCity.pretty_city(un["city"])
-          un
+        if account["universities"]
+          account["universities"] = account["universities"].map do |un| 
+            un["country"] = VkCity.pretty_country(un["country"])
+            un["city"] = VkCity.pretty_city(un["city"])
+            un
+          end
         end
-        account["schools"] = account["schools"].map do |un| 
-          un["country"] = VkCity.pretty_country(un["country"])
-          un["city"] = VkCity.pretty_city(un["city"])
-          un
+        if account["schools"]
+          account["schools"] = account["schools"].map do |un| 
+            un["country"] = VkCity.pretty_country(un["country"])
+            un["city"] = VkCity.pretty_city(un["city"])
+            un
+          end
         end
         account["relation"] = VkAccount.pretty_relation(account["relation"])
         f.write("#{Oj.dump(account).encode('windows-1251', {:invalid => :replace, :undef => :replace, :replace => '?'})}")
