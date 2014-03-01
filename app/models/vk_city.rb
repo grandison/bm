@@ -8,14 +8,14 @@ class VkCity < ActiveRecord::Base
   def self.pretty_country(country)
     @countries ||= {}
     @countries[country] ||= begin
-      Oj.load(Typhoeus.get("https://api.vk.com/method/database.getCountriesById?country_ids=#{country}&access_token=794e9fcb0d26fe28c2010a8b87a802c3b82304fd644154d8daf0f676f7662291a3f30835259b81ced0e67").body)["response"].first["name"]
+      country && Oj.load(Typhoeus.get("https://api.vk.com/method/database.getCountriesById?country_ids=#{country}&access_token=794e9fcb0d26fe28c2010a8b87a802c3b82304fd644154d8daf0f676f7662291a3f30835259b81ced0e67").body)["response"].first["name"]
     end
   end
 
   def self.pretty_city(city)
     @countries ||= {}
     @countries[city] ||= begin
-      Oj.load(Typhoeus.get("https://api.vk.com/method/database.getCitiesById?city_ids=#{city}&access_token=794e9fcb0d26fe28c2010a8b87a802c3b82304fd644154d8daf0f676f7662291a3f30835259b81ced0e67").body)["response"].first["name"]
+      city && (Oj.load(Typhoeus.get("https://api.vk.com/method/database.getCitiesById?city_ids=#{city}&access_token=794e9fcb0d26fe28c2010a8b87a802c3b82304fd644154d8daf0f676f7662291a3f30835259b81ced0e67").body)["response"].first["name"])
     end
   end
 end
