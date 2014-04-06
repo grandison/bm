@@ -20,7 +20,7 @@ class VkAccount < ActiveRecord::Base
         return false
       end
       return false unless connection.execute("SHOW INDEX FROM vk_group_#{order.vk_group_id}").first
-      scope = scope.joins("INNER JOIN vk_group_#{group_id} ON vk_accounts.vk_id = vk_group_#{group_id}.vk_user_id")
+      scope = scope.joins("INNER JOIN vk_group_#{group_id} ON vk_accounts.vk_id = vk_group_#{group_id}.vk_user_id ORDER BY vk_group_#{group_id}.id")
     end
     scope
   end
