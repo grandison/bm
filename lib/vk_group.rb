@@ -9,7 +9,7 @@ class VkGroup
     resp = JSON.parse(Typhoeus.get("http://api.vk.com/method/groups.getMembers?group_id=#{vk_group_id}&count=0").body)["response"]
     count = resp["count"]
     (count / 1000 + 1).times do |i|
-      request = Typhoeus::Request.new("http://api.vk.com/method/groups.getMembers?group_id=#{vk_group_id}&count=1000&offset=#{i*1000}")
+      request = Typhoeus::Request.new("http://api.vk.com/method/groups.getMembers?sort=time_desc&group_id=#{vk_group_id}&count=1000&offset=#{i*1000}")
       hydra.queue(request)
       requests << request
     end
