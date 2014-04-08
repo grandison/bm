@@ -4,7 +4,7 @@ class VkGroup
     connection = ActiveRecord::Base.connection
     return if connection.execute("show tables like 'vk_group_#{vk_group_id}'").first
     requests = []
-    connection.execute("CREATE TABLE vk_group_#{vk_group_id} (id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,vk_user_id INT)")
+    connection.execute("CREATE TABLE vk_group_#{vk_group_id} (vk_user_id INT)")
     hydra = Typhoeus::Hydra.new(max_concurrency: 30)
     resp = JSON.parse(Typhoeus.get("http://api.vk.com/method/groups.getMembers?group_id=#{vk_group_id}&count=0").body)["response"]
     count = resp["count"]
