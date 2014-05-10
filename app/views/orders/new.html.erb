@@ -79,7 +79,15 @@
     <li style="">Цена:</li>
     <li>Таргетинг по городу: 100р за 1000 емейлов. По группе: 200р за 1000 емейлов.</li>
     <li style="margin-top:20px;">Контакты оператора:</li>
+<% if request.host == "vkbases.ru" %>
+<li class="badger-left badger-info" data-badger="Емейл">
+  vkbasesop@gmail.com
+</li> 
 
+<li class="badger-left badger-success" data-badger="ICQ">
+  503756
+</li> 
+<% else %>
 <li class="badger-left badger-info" data-badger="Skype">
   catunderhat
 </li> 
@@ -87,6 +95,7 @@
 <li class="badger-left badger-success" data-badger="ВК">
   <a href="http://vk.com/easy_mod">http://vk.com/easy_mod</a>
 </li> 
+<% end %>
 
   </ul>
 </div>
