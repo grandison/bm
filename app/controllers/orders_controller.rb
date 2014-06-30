@@ -27,7 +27,7 @@ class OrdersController < ApplicationController
     @count = VkAccount.search(@order).count
   end
 
-  def generate
+  def boom
     @order = Order.find_by_plug(params[:order_id])
     @order.generate!
   end
@@ -35,12 +35,12 @@ class OrdersController < ApplicationController
   def generate_with_names
     @order = Order.find_by_plug(params[:order_id])
     @order.generate_with_names!
-    render action: "generate"
+    render action: "boom"
   end
 
   def generate_full
     @order = Order.find_by_plug(params[:order_id])
     @order.generate_full!
-    render action: "generate"
+    render action: "boom"
   end
 end
