@@ -57,12 +57,9 @@
   margin-top: 60px;
 }
 </style>
+       
 
-
-
-        
-
-<div class="span4">
+<div class="span3">
 <%= semantic_form_for @order, html: {role:"form", style:"width:100%;"}, remote: true do |f| %>
   <%= f.inputs do %>
     <%= f.input :vk_group_link, label: "Ссылка на группу ВК" %>
@@ -73,8 +70,7 @@
 <% end %>
 
 </div>
-<div class="span5">
-  <h2 id="emails-count">&nbsp;</h2>
+<div class="span3">
   <ul style="margin:0px;">
     <li>1. Введите адрес группы вконтакте</li>
     <li>2. Узнайте сколько емейлов с нее получилось извлечь</li>
