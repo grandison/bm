@@ -1,1 +1,10 @@
+Имя продавца: <%= @seller.name %> <br>
+<% if @error %>
+  Лимит исчерпан!
+<% else %>
 Генерация запущена!
+<br> <br>
+Ссылка на заказ: <a target="_blank" href="http://bazomania.com/<%= @order.plug %>.txt">http://bazomania.com/<%= @order.plug %>.txt</a><br>
+Осталось на лимите: <%= @seller.limit %>
+<br>
+<% end %>

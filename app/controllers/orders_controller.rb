@@ -28,8 +28,15 @@ class OrdersController < ApplicationController
   end
 
   def boom
+    @seller = Seller.find_by_code(params[:saller_code])
     @order = Order.find_by_plug(params[:order_id])
-    @order.generate!
+    if @seller.limit && @seller.limit <= 0
+      @error = true
+    else
+      @order.generate!
+      @seller.limit -= VkAccount.search(@order).count
+      @seller.save
+    end
   end
 
   def boom_with_names
