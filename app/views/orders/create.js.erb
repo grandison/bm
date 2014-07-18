@@ -2,7 +2,7 @@
   window.location = '<%= url_for(@order) %>';
 <% else %>
   <% if @count %>
-    $("#emails-count").text("<%= @count %> емейлов найдено.");
+    $("#emails-count").text("<%= @count %> емейлов найдено. Стоимость <%= @count / 10 %>р.");
     $("#new_order :input").removeAttr("disabled");
   <% else %>
   setTimeout(function(){
