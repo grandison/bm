@@ -34,8 +34,10 @@ class OrdersController < ApplicationController
       @error = true
     else
       @order.generate!
-      @seller.limit -= VkAccount.search(@order).count
-      @seller.save
+      if @seller.limit
+        @seller.limit -= VkAccount.search(@order).count
+        @seller.save
+      end
     end
   end
 
