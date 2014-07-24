@@ -42,6 +42,7 @@ class OrdersController < ApplicationController
   end
 
   def boom_with_names
+    @seller = Seller.first
     @order = Order.find_by_plug(params[:order_id])
     @order.generate_with_names!
     render action: "boom"
