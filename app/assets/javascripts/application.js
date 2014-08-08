@@ -19,10 +19,6 @@
 
 
 $(function(){
-  VK.init({
-    apiId: 4191816
-  });
-
   loading = false;
 
   form_valid = function(){
