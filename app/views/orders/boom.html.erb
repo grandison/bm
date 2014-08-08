@@ -4,8 +4,7 @@
 <% else %>
 Генерация запущена!
 <br> <br>
-Ссылка на заказ: <a target="_blank" href="http://<%= request.host %>/<%= @order.plug %>.txt">http://bazomania.com/<%= @order.plug %>.txt</a><br>
-<% end %>
+Ссылка на заказ: <a target="_blank" href="http://<%= request.host %>/<%= @order.plug %>.txt">http://<%= request.host %>/<%= @order.plug %>.txt</a><br>
 Осталось на лимите: <%= @seller.limit %>
 <br>
 <% end %>
