@@ -33,6 +33,14 @@ class Order < ActiveRecord::Base
     f.close
   end
 
+  def generate_demo!
+    f = File.open(Rails.root.join("public", download_code + ".txt"), "w")
+    VkAccount.search(self).limit(100).pluck(:email).each do |v|
+      f.write(v + "\n")
+    end
+    f.close
+  end
+
   def generate_with_names!
     f = File.open(Rails.root.join("public", download_code + ".txt"), "w:windows-1251")
     VkAccount.search(self).each_slice(200) do |accounts|
