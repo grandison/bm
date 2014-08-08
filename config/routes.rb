@@ -7,5 +7,7 @@ VkMails::Application.routes.draw do
     get ':saller_code', to: 'orders#boom'
     # get :generate_full
   end
+  get :ac, to: redirect('http://actionpay.ru/ref:NzI2MzEzODk1MjM3')
+  get :ad, to: redirect('https://www.admitad.com/ru/promo/?ref=6192568b1c')
   root to: "orders#new"
 end
