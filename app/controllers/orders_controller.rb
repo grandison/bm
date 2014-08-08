@@ -1,6 +1,7 @@
 # -*- encoding : utf-8 -*-
 class OrdersController < ApplicationController
   def new
+    @main_page = true
     @order = Order.new
   end
 
