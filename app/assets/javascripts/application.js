@@ -62,6 +62,4 @@ $(function(){
     }
   });
 
-  $("body").append("<img src='/ac' style='display:none;'>");
-  $("body").append("<img src='/ad' style='display:none;'>");
 });
