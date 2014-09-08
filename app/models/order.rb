@@ -45,7 +45,7 @@ class Order < ActiveRecord::Base
     f = File.open(Rails.root.join("public", download_code + ".txt"), "w:windows-1251")
     VkAccount.search(self).each_slice(200) do |accounts|
       Oj.load(Typhoeus.post("https://api.vk.com/method/getProfiles?fields=city,sex&access_token=9a01834553da900ab575b7bd3a2c436289f6a7a1d8cb3255f8b4b79c598948b5dfe49ab93c4b0dbb8f5cc", body:{uids: accounts.map(&:vk_id).join(","), "Content-Type" => 'application/x-www-form-urlencoded'}).body)["response"].each_with_index do |account,index|
-        f.write("#{account["first_name"].to_s.encode('windows-1251', {:invalid => :replace, :undef => :replace, :replace => '?'})} #{account["last_name"].to_s.encode('windows-1251', {:invalid => :replace, :undef => :replace, :replace => '?'})},#{accounts[index].email},#{VkCity.pretty_city(account["city"])}\n")
+        f.write("#{account["first_name"].to_s.encode('windows-1251', {:invalid => :replace, :undef => :replace, :replace => '?'})} #{account["last_name"].to_s.encode('windows-1251', {:invalid => :replace, :undef => :replace, :replace => '?'})},#{accounts[index].email},#{VkCity.pretty_city(account["city"]).to_s.encode('windows-1251', {:invalid => :replace, :undef => :replace, :replace => '?'})}}\n")
       end
       sleep(0.2)
     end

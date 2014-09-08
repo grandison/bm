@@ -19,7 +19,7 @@ class VkCity < ActiveRecord::Base
 
   def self.pretty_city(city)
     if city && (city > 0)
-      @@cities[city.to_s].name
+      @@cities[city.to_s].try(:name)
     end
   end
 
