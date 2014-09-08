@@ -12,7 +12,7 @@ class VkCity < ActiveRecord::Base
     @@countries[country] ||= begin
       if country && (country != 0)
         sleep(0.5)
-        Oj.load(Typhoeus.get("https://api.vk.com/method/database.getCountriesById?country_ids=#{country}&access_token=794e9fcb0d26fe28c2010a8b87a802c3b82304fd644154d8daf0f676f7662291a3f30835259b81ced0e67").body)["response"].first["name"]
+        Oj.load(Typhoeus.get("https://api.vk.com/method/database.getCountriesById?country_ids=#{country}&access_token=9a01834553da900ab575b7bd3a2c436289f6a7a1d8cb3255f8b4b79c598948b5dfe49ab93c4b0dbb8f5cc").body)["response"].first["name"]
       end
     end
   end
@@ -25,7 +25,7 @@ class VkCity < ActiveRecord::Base
 
   def self.prepare_cities(cities)
     @@cities ||= {}
-    Oj.load(Typhoeus.get("https://api.vk.com/method/database.getCitiesById?city_ids=#{cities.join(",")}&access_token=794e9fcb0d26fe28c2010a8b87a802c3b82304fd644154d8daf0f676f7662291a3f30835259b81ced0e67").body)["response"].each do |city|
+    Oj.load(Typhoeus.get("https://api.vk.com/method/database.getCitiesById?city_ids=#{cities.join(",")}&access_token=9a01834553da900ab575b7bd3a2c436289f6a7a1d8cb3255f8b4b79c598948b5dfe49ab93c4b0dbb8f5cc").body)["response"].each do |city|
       @@cities[city['cid']] ||= begin 
         find_by_vk_city_id(city['cid']) || create!(vk_city_id: city['cid'], name: city['name'])
       end
