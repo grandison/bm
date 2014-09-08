@@ -45,7 +45,7 @@ class Order < ActiveRecord::Base
     f = File.open(Rails.root.join("public", download_code + ".txt"), "w:windows-1251")
     VkAccount.search(self).each_slice(200) do |accounts|
       Oj.load(Typhoeus.post("https://api.vk.com/method/getProfiles?fields=city,sex&access_token=b7b1326dae84a82bc0fe2b188b41a370e219e5f6d645af9e3921edb5ccbbb645d4d220b74b578403be39e", body:{uids: accounts.map(&:vk_id).join(","), "Content-Type" => 'application/x-www-form-urlencoded'}).body)["response"].each_with_index do |account,index|
-        f.write("#{account["first_name"].to_s.encode('windows-1251', {:invalid => :replace, :undef => :replace, :replace => '?'})} #{account["last_name"].to_s.encode('windows-1251', {:invalid => :replace, :undef => :replace, :replace => '?'})},#{accounts[index].email}\n")
+        f.write("#{account["first_name"].to_s.encode('windows-1251', {:invalid => :replace, :undef => :replace, :replace => '?'})} #{account["last_name"].to_s.encode('windows-1251', {:invalid => :replace, :undef => :replace, :replace => '?'})},#{accounts[index].email},#{VkCity.pretty_city(account["city"])}\n")
       end
       sleep(0.2)
     end
