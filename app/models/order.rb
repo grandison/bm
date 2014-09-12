@@ -6,7 +6,8 @@ class Order < ActiveRecord::Base
   before_save :set_group_id
 
   def generate_slug
-    self.plug = SecureRandom.hex(15)
+    screen_name = vk_group_link.match(/vk.com\/([\d\_\w\.]+)/).try(:[],1)
+    self.plug = screen_name + "__" + SecureRandom.hex(3)
   end
 
   def to_param
