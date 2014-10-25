@@ -70,6 +70,18 @@ ActiveRecord::Schema.define(version: 20140718142819) do
     t.datetime "updated_at"
   end
 
+  create_table "vk_group_18615608", id: false, force: true do |t|
+    t.integer "vk_user_id"
+  end
+
+  add_index "vk_group_18615608", ["vk_user_id"], name: "vk_user_id", using: :btree
+
+  create_table "vk_group_31957048", id: false, force: true do |t|
+    t.integer "vk_user_id"
+  end
+
+  add_index "vk_group_31957048", ["vk_user_id"], name: "vk_user_id", using: :btree
+
   create_table "vk_group_33193420", id: false, force: true do |t|
     t.integer "vk_user_id"
   end
